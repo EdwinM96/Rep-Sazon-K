@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "811669852249",
+    "firebase_url": "https://rep-sazon.firebaseio.com",
+    "project_id": "rep-sazon",
+    "storage_bucket": "rep-sazon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811669852249:android:5341bd470a4e80a1",
+        "android_client_info": {
+          "package_name": "com.example.max00.republica_sazon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811669852249-dco70fi0t297p31ke5od86u1a4vbevj8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.max00.republica_sazon",
+            "certificate_hash": "a2414cfff3c47f007a1b1156c4f76cb8153b94b0"
+          }
+        },
+        {
+          "client_id": "811669852249-a1u7qlq24rcg6bia36r2v36v4cv5eopp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYJt75ANOVIyWnmoHZqC1nfvdnYnjT0bw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811669852249-a1u7qlq24rcg6bia36r2v36v4cv5eopp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
