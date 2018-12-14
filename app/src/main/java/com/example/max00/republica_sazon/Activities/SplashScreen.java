@@ -26,8 +26,8 @@ public class SplashScreen extends AppCompatActivity {
         Thread timer= new Thread(){
             public void run(){
                 try{
-                    //Display for 2 seconds
-                    sleep(2000);
+                    //Display for 1.5 seconds
+                    sleep(1500);
                 }
                 catch (InterruptedException e){
                     // TODO: handle exception
