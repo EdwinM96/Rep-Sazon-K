@@ -36,7 +36,7 @@ public class SplashScreen extends AppCompatActivity {
 
                 finally
                 {
-                    Intent Startup = new Intent(getApplicationContext(), Login.class);
+                    Intent Startup = new Intent(getApplicationContext(), MainActivity.class);
                     TransitionManager.beginDelayedTransition(splash);
                     startActivity(Startup);
                 }

@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private static final String TAG = "Loginactivity";
     private RelativeLayout relativeLayout, relativeLayoutbelowimg;
     private Handler handler = new Handler();
     private EditText email, password;
@@ -63,6 +62,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
 
     public void signIn(String email, String password, final ViewGroup transition){
         mAuth.signInWithEmailAndPassword(email, password)
