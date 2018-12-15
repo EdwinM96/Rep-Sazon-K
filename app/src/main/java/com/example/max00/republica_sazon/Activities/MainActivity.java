@@ -1,16 +1,22 @@
 package com.example.max00.republica_sazon.Activities;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.max00.republica_sazon.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +27,8 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
+    private DrawerLayout drawer;
+    private TextView nombre, rol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +37,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        nombre = headerView.findViewById(R.id.nombre);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -40,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-
+        //Toast.makeText(getApplicationContext(), firebaseUser, Toast.LENGTH_LONG).show();
     }
 
 
@@ -49,6 +59,8 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
         if (firebaseUser == null){
             gotoLogin();
+        }else {
+            nombre.setText(firebaseUser.getEmail());
         }
     }
 
@@ -108,11 +120,30 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+            TransitionManager.beginDelayedTransition(drawer);
+            AlertDialog show = new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Cerrar Sesión")
+                    .setMessage("("+firebaseUser.getEmail()+") ¿Está seguro que desea cerrar sesión?")
+                    .setIcon(R.drawable.rs_ic)
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    })
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            firebaseAuth.signOut();
+                            gotoLogin();
+                        }
+                    })
+                    .show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
