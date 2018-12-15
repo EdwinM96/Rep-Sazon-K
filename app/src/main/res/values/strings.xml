@@ -6,4 +6,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="editarperfil">Editar Perfil</string>
+    <string name="edit_indicacion_img">Haga click para seleccionar una imagen</string>
 </resources>

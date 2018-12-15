@@ -3,6 +3,7 @@ package com.example.max00.republica_sazon.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,20 +16,27 @@ import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.max00.republica_sazon.Activities.UI.DialogScreen;
 import com.example.max00.republica_sazon.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener, DialogScreen.DialogScreenListener{
 
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     private DrawerLayout drawer;
-    private TextView nombre, rol;
+    private TextView nombre, correo;
+    private Button editar;
+    private CircleImageView picture;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +46,12 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
+
+        //Correspondiente al nav_header_main
         nombre = headerView.findViewById(R.id.nombre);
+        correo = headerView.findViewById(R.id.textView);
+        picture = headerView.findViewById(R.id.imageView);
+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,9 +61,23 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         //Toast.makeText(getApplicationContext(), firebaseUser, Toast.LENGTH_LONG).show();
+
+        editar = headerView.findViewById(R.id.btn_editprofile);
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               editprofile();
+            }
+        });
+    }
+
+    public void editprofile(){
+        DialogScreen dialogScreen = new DialogScreen();
+        dialogScreen.show(getSupportFragmentManager(),"Editar usuario");
     }
 
 
@@ -60,7 +87,7 @@ public class MainActivity extends AppCompatActivity
         if (firebaseUser == null){
             gotoLogin();
         }else {
-            nombre.setText(firebaseUser.getEmail());
+            correo.setText(firebaseUser.getEmail());
         }
     }
 
@@ -146,4 +173,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onSaveChanges(Uri photo, String name, String phone) {
+        nombre.setText(name);
+        if(photo!=null){
+            picture.setImageURI(photo);
+        }
+    }
 }

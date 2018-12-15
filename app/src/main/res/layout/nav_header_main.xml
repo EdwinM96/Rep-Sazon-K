@@ -14,13 +14,35 @@
     tools:context=".Activities.MainActivity"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/nav_header_desc"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/rs_ic" />
+        android:layout_height="wrap_content">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center"
+            android:layout_width="75dp"
+            android:id="@+id/imageView"
+            android:padding="10dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#ffffff"
+            android:src="@drawable/rs_ic"
+            android:layout_height="75dp"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_shape2"
+            android:textSize="12sp"
+            android:id="@+id/btn_editprofile"
+            android:layout_marginLeft="32dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/editarperfil"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
